@@ -12,7 +12,11 @@ import math
 from cntk.contrib.crosstalkcaffe.unimodel import cntkmodel
 from cntk.contrib.crosstalkcaffe.adapter import baseadapter
 from . import caffeimpl
-from google.protobuf import text_format
+
+try:
+    from google.protobuf import text_format
+except ImportError:
+    sys.stderr.write('Parsing the weights needs Protobuf\n')
 
 def _format_to_list(target, rank, default_pad=0):
     if isinstance(target, int):
